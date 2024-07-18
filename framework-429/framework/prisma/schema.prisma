@@ -1,0 +1,136 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id                 String             @id @default(uuid()) @db.Uuid
+  names              PlayerName[]
+  identifiers        PlayerIdentifier[]
+  tokens             PlayerToken[]
+  bans               Ban[]              @relation(name: "target")
+  issuedBans         Ban[]              @relation(name: "issuer")
+  revokedBans        Ban[]              @relation(name: "revoker")
+  permissions        PlayerPermission[] @relation(name: "player")
+  issuedPermissions  PlayerPermission[] @relation(name: "issuer")
+  revokedPermissions PlayerPermission[] @relation(name: "revoker")
+  tebexPurchase      TebexPurchase[]
+  characters         Character[]
+  latestLogin        DateTime           @default(now())
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  deletedAt          DateTime?
+}
+
+model PlayerName {
+  id        String    @id @default(uuid()) @db.Uuid
+  value     String
+  playerId  String    @db.Uuid
+  player    Player    @relation(fields: [playerId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+enum IdentifierType {
+  discord
+  fivem
+  ip
+  license
+  license2
+  live
+  steam
+  xbl
+}
+
+model PlayerIdentifier {
+  id        String         @id @default(uuid()) @db.Uuid
+  type      IdentifierType
+  value     String
+  playerId  String         @db.Uuid
+  player    Player         @relation(fields: [playerId], references: [id])
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  deletedAt DateTime?
+}
+
+model PlayerToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  value     String
+  playerId  String    @db.Uuid
+  player    Player    @relation(fields: [playerId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model Ban {
+  id        String    @id @default(uuid()) @db.Uuid
+  targetId  String    @db.Uuid
+  target    Player    @relation(name: "target", fields: [targetId], references: [id])
+  reason    String
+  issuerId  String    @db.Uuid
+  issuer    Player    @relation(name: "issuer", fields: [issuerId], references: [id])
+  revokerId String?   @db.Uuid
+  revoker   Player?   @relation(name: "revoker", fields: [revokerId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  expiresAt DateTime?
+  deletedAt DateTime?
+}
+
+model PlayerPermission {
+  id        String    @id @default(uuid()) @db.Uuid
+  value     String
+  playerId  String    @db.Uuid
+  player    Player    @relation(name: "player", fields: [playerId], references: [id])
+  issuerId  String    @db.Uuid
+  issuer    Player    @relation(name: "issuer", fields: [issuerId], references: [id])
+  revokerId String?   @db.Uuid
+  revoker   Player?   @relation(name: "revoker", fields: [revokerId], references: [id])
+  expiresAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model TebexPurchase {
+  id            String    @id @default(uuid()) @db.Uuid
+  transactionId String    @unique
+  packageId     String
+  playerId      String    @db.Uuid
+  player        Player    @relation(fields: [playerId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+}
+
+enum Gender {
+  male
+  female
+  nonbinary
+}
+
+model Character {
+  id          String    @id @default(uuid()) @db.Uuid
+  firstName   String
+  lastName    String
+  birthdate   DateTime
+  gender      Gender
+  health      Int
+  armor       Int
+  position    Json      @db.JsonB
+  timePlayed  Int       @default(0)
+  playerId    String    @db.Uuid
+  player      Player    @relation(fields: [playerId], references: [id])
+  firstLogin  DateTime?
+  latestLogin DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+}

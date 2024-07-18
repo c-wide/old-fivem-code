@@ -1,0 +1,61 @@
+{
+	"$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+	"type": "AdaptiveCard",
+	"version": "1.5",
+	"body": [
+		{
+			"type": "TextBlock",
+			"text": "You're banned from this server.",
+			"wrap": true,
+			"style": "heading"
+		},
+		{
+			"type": "TextBlock",
+			"text": "Please review the details below. If you believe this is a mistake, contact {{SERVER_NAME}} support with the provided Ban ID.",
+			"wrap": true,
+			"size": "Medium"
+		},
+		{
+			"type": "RichTextBlock",
+			"inlines": [
+				{
+					"type": "TextRun",
+					"text": "Reason: ",
+					"weight": "Bolder"
+				},
+				{
+					"type": "TextRun",
+					"text": "{{REASON}}"
+				}
+			]
+		},
+		{
+			"type": "RichTextBlock",
+			"inlines": [
+				{
+					"type": "TextRun",
+					"text": "Expiration Date: ",
+					"weight": "Bolder"
+				},
+				{
+					"type": "TextRun",
+					"text": "{{EXPIRATION_DATE}}"
+				}
+			]
+		},
+		{
+			"type": "RichTextBlock",
+			"inlines": [
+				{
+					"type": "TextRun",
+					"text": "Ban ID: ",
+					"weight": "Bolder"
+				},
+				{
+					"type": "TextRun",
+					"text": "{{BAN_ID}}"
+				}
+			]
+		}
+	]
+}

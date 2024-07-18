@@ -1,0 +1,16 @@
+{
+  "name": "framework-429",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {},
+  "devDependencies": {
+    "@biomejs/biome": "1.5.1",
+    "@types/node": "^20.10.4",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "pnpm@8.12.0",
+  "dependencies": {
+    "short-uuid": "^4.2.2"
+  }
+}

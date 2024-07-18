@@ -1,0 +1,47 @@
+{
+	"$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+	"type": "AdaptiveCard",
+	"version": "1.5",
+	"body": [
+		{
+			"type": "TextBlock",
+			"text": "Support Assistance Required",
+			"wrap": true,
+			"style": "heading"
+		},
+		{
+			"type": "TextBlock",
+			"text": "Please contact {{SERVER_NAME}} support for assistance.",
+			"wrap": true,
+			"size": "Medium"
+		},
+		{
+			"type": "RichTextBlock",
+			"inlines": [
+				{
+					"type": "TextRun",
+					"text": "Reason: ",
+					"weight": "Bolder"
+				},
+				{
+					"type": "TextRun",
+					"text": "{{REASON}}"
+				}
+			]
+		},
+		{
+			"type": "RichTextBlock",
+			"inlines": [
+				{
+					"type": "TextRun",
+					"text": "Correlation ID: ",
+					"weight": "Bolder"
+				},
+				{
+					"type": "TextRun",
+					"text": "{{CORRELATION_ID}}"
+				}
+			]
+		}
+	]
+}

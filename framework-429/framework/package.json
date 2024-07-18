@@ -1,0 +1,36 @@
+{
+  "name": "framework",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/esbuild.config.js",
+    "dev": "node scripts/esbuild.config.js --watch --restart",
+    "lint": "biome lint ./features",
+    "format": "biome format --write ./features",
+    "format:check": "biome format ./features"
+  },
+  "devDependencies": {
+    "@citizenfx/client": "2.0.7257-1",
+    "@citizenfx/server": "2.0.7257-1",
+    "@types/mustache": "^4.2.5",
+    "@types/node-fetch": "2",
+    "colorette": "^2.0.20",
+    "dotenv": "^16.3.1",
+    "esbuild": "0.19.10",
+    "esbuild-decorators": "^1.0.0",
+    "prisma": "^5.7.1",
+    "rcon": "^1.1.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.8.1",
+    "make-plural": "^7.3.0",
+    "mustache": "^4.2.0",
+    "node-fetch": "2",
+    "reflect-metadata": "^0.2.1",
+    "tsyringe": "^4.8.0",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1",
+    "zod": "^3.22.4"
+  },
+  "packageManager": "pnpm@8.12.0"
+}

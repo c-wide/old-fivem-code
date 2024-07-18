@@ -1,0 +1,56 @@
+{
+	"type": "AdaptiveCard",
+	"$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+	"version": "1.5",
+	"body": [
+		{
+			"type": "TextBlock",
+			"text": "Session Grace Detected",
+			"wrap": true,
+			"style": "heading"
+		},
+		{
+			"type": "TextBlock",
+			"text": "Your previous session is in a grace period. You can rejoin it immediately or join the queue for a new session.",
+			"wrap": true,
+			"size": "Medium"
+		},
+		{
+			"type": "ColumnSet",
+			"columns": [
+				{
+					"type": "Column",
+					"width": "stretch",
+					"items": [
+						{
+							"type": "ActionSet",
+							"actions": [
+								{
+									"type": "Action.Submit",
+									"title": "Rejoin Session",
+									"id": "rejoinSession"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "Column",
+					"width": "stretch",
+					"items": [
+						{
+							"type": "ActionSet",
+							"actions": [
+								{
+									"type": "Action.Submit",
+									"title": "Join Queue",
+									"id": "queueSelect"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
